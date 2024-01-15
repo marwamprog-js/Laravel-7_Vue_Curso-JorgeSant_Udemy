@@ -15,7 +15,7 @@ class ContatoController extends Controller
             '3' => 'Reclamação',
         ];
 
-        return view('site.contato', ['motivo_contato' => $motivo_contatos]);
+        return view('site.contato', ['motivo_contatos' => $motivo_contatos]);
     }
 
     public function salvar(Request $request) {
