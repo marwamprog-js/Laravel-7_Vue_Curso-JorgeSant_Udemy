@@ -195,3 +195,9 @@ button:hover {
   border: 1px solid #f00;
   border-radius: 5px;
 }
+
+.input-error {
+  width: 100%;
+  display: flex;
+  color: #f00;
+}

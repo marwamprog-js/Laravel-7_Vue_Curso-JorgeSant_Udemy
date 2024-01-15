@@ -11,10 +11,19 @@
 <form action="{{ route('site.contato.salvar') }}" method="POST">
     @csrf
     <input type="text" name="nome" placeholder="Nome" value="{{ old('nome') }}" class="{{ $classe }}">
+    @if ($errors->has('nome'))
+        <span class="input-error">{{ $errors->first('nome') }}</span>
+    @endif
     <br>
     <input type="text" name="telefone" placeholder="Telefone" value="{{ old('telefone') }}" class="{{ $classe }}">
+    @if ($errors->has('telefone'))
+        <span class="input-error">{{ $errors->first('telefone') }}</span>
+    @endif
     <br>
     <input type="text" name="email" placeholder="E-mail" value="{{ old('email') }}" class="{{ $classe }}">
+    @if ($errors->has('email'))
+        <span class="input-error">{{ $errors->first('email') }}</span>
+    @endif
     <br>
 
     <select name="motivo_contatos_id" class="{{ $classe }}">
@@ -25,8 +34,12 @@
         @endforeach
 
     </select>
+    @if ($errors->has('motivo_contatos_id'))
+        <span class="input-error">{{ $errors->first('motivo_contatos_id') }}</span>
+    @endif
     <br>
     <textarea name="mensagem" class="{{ $classe }}" placeholder="Preencha aqui a sua mensagem">{{ old('mensagem') }}</textarea>
+    <span class="input-error">{{ ($errors->has('mensagem')) ? $errors->first('mensagem') : '' }}</span>    
     <br>
     <button type="submit" class="{{ $classe }}">ENVIAR</button>
 </form>
