@@ -18,11 +18,11 @@ Route::get('/', 'PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@principal')->name('site.sobrenos');
 
 Route::get('/contato', 'ContatoController@principal')->name('site.contato');
-Route::post('/contato', 'ContatoController@mensagem')->name('site.contato');
+Route::post('/contato', 'ContatoController@salvar')->name('site.contato.salvar');
 
 Route::get('/login', function() {
     return "Login";
-})->name('site.login');
+})->name('site.login'); 
 
 
 Route::prefix('/app')->group(function() {
