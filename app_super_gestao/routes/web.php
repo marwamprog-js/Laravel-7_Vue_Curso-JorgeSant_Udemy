@@ -22,7 +22,14 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::get('/sair', 'LoginController@sair')->name('app.sair');
 
     Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
-    Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');    
+
+    //### FORNECEDOR
+    Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor'); 
+    Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar'); 
+    Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar'); 
+    
+    
+
     Route::get('/produto', 'ProdutoController@index')->name('app.produto');
 
 });
