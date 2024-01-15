@@ -189,3 +189,9 @@ button:hover {
 }
 
 /* Alert validade */
+.alert {
+  background: #f48a8a;
+  padding: 10px;
+  border: 1px solid #f00;
+  border-radius: 5px;
+}

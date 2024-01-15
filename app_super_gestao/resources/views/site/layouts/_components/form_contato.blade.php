@@ -1,10 +1,9 @@
 {{ $slot }}
 
-@if (count($errors) > 0)
+@if ($errors->any())
     <div class="alert">
-        {{ $errors }}
-        @foreach ($errors as $e)
-           <p>{{ $e->nome }}</p>     
+        @foreach ($errors->all() as $e)
+           <p>{{ $e }}</p>     
         @endforeach
     </div>
 @endif
@@ -18,11 +17,11 @@
     <input type="text" name="email" placeholder="E-mail" value="{{ old('email') }}" class="{{ $classe }}">
     <br>
 
-    <select name="motivo_contato" class="{{ $classe }}">
+    <select name="motivo_contatos_id" class="{{ $classe }}">
         <option value="">Qual o motivo do contato?</option>
 
         @foreach ($motivo_contatos as $key => $motivo_contato )
-            <option value="{{ $motivo_contato->id }}" {{ old('motivo_contato') == $motivo_contato->id ? 'Selected' : '' }} >{{ $motivo_contato->motivo_contato }}</option>
+            <option value="{{ $motivo_contato->id }}" {{ old('motivo_contatos_id') == $motivo_contato->id ? 'Selected' : '' }} >{{ $motivo_contato->motivo_contato }}</option>
         @endforeach
 
     </select>
