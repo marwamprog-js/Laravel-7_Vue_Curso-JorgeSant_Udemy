@@ -12,12 +12,11 @@ Route::get('/contato', 'ContatoController@principal')->name('site.contato');
     
 Route::post('/contato', 'ContatoController@salvar')->name('site.contato.salvar');
 
-Route::get('/login', function() {
-    return "Login";
-})->name('site.login'); 
+Route::get('/login/{erro?}', 'LoginController@index')->name('site.login'); 
+Route::post('/login', 'LoginController@autenticar')->name('site.login'); 
 
-
-Route::prefix('/app')->group(function() {
+//#### ROTA APP
+Route::middleware('autenticacao')->prefix('/app')->group(function() {
     
     Route::get('/clientes', function() {
         return "Cliente";
