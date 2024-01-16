@@ -21,6 +21,7 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::get('/home', 'HomeController@index')->name('app.home');
     Route::get('/sair', 'LoginController@sair')->name('app.sair');
 
+    //### CLIENTE
     Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
 
     //### FORNECEDOR
@@ -29,11 +30,12 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::post('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
     Route::get('/fornecedor/editar/{id}/{msg?}', 'FornecedorController@editar')->name('app.fornecedor.editar');  
     Route::get('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar'); 
-    Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar'); 
+    Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
+    Route::get('/fornecedor/excluir/{id}', 'FornecedorController@excluir')->name('app.fornecedor.excluir');  
     
     
-
-    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
+    //### PRODUTO
+    Route::resource('/produto', 'ProdutoController');
 
 });
 
