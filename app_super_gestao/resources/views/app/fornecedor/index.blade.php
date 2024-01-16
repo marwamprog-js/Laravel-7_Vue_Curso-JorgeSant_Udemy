@@ -18,7 +18,7 @@
         </ul>
     </div>
 
-    <div class="informacao-pagina">
+    <div class="informacao-pagina">        
         <div style="width: 30%; margin-left: auto; margin-right: auto;">
             <form action="{{ route('app.fornecedor.listar') }}" method="post">
                 @csrf
