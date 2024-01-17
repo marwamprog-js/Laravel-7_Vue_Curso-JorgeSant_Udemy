@@ -37,6 +37,9 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
     //### PRODUTO
     Route::resource('/produto', 'ProdutoController');
 
+    //### PRODUTOS DETALHES
+    Route::resource('/produto-detalhe', 'ProdutoDetalheController');
+
 });
 
 Route::fallback(function() {
