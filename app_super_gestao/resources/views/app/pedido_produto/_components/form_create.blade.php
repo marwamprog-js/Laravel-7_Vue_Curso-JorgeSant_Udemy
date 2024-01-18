@@ -11,6 +11,8 @@
 </select>
 {{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}
 
+<input type="number" class="borda-preta" name="quantidade" id="quantidade" value="{{ old('quantidade') ?? '' }}" placeholder="Quantidade">
+{{ $errors->has('quantidade') ? $errors->first('quantidade') : '' }}
 
 <button type="submit" class="borda-preta">Adicionar</button>
 </form>
