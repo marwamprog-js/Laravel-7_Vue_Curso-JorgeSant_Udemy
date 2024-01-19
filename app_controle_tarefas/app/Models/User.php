@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
-use App\Notifications\RedefinirSenhaNotification;
-use App\Notifications\VerificarEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\RedefinirSenhaNotification;
+use App\Notifications\VerificarEmailNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -26,9 +25,9 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -36,21 +35,24 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    //Método intercepta o fluxo padrão de alteração de senha
-    //sobrescrevendo o método atual
     public function sendPasswordResetNotification($token) {
         $this->notify(new RedefinirSenhaNotification($token, $this->email, $this->name));
     }
 
     public function sendEmailVerificationNotification() {
         $this->notify(new VerificarEmailNotification($this->name));
+    }
+
+    public function tarefas() {
+        //hasMany - Tem Muitos
+        return $this->hasMany('App\Models\Tarefa');
     }
 }

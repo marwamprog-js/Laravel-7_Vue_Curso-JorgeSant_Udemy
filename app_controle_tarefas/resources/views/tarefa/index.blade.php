@@ -1,62 +1,71 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Tarefas | <a class="float-right" href="{{ route('tarefa.create') }}">Novo</a></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            Tarefas
+                        </div>
+                        <div class="col-6" style="text-align: right">
+                            <a href="{{route('tarefa.create')}}" class="float-right ml-2">Novo</a> |
+                            <a href="{{route('tarefa.exportacao')}}" class="float-right">Exportação</a>
+                        </div>
+                    </div>
+                    
+                </div>
 
-                    <div class="card-body">
-
-                        <table class="table">
-                            <thead>
-                              <tr>
+                <div class="card-body">
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Tarefa</th>
-                                <th scope="col">Data limite de Conclusão</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($tarefas as $tarefa)
-                                    <tr>
-                                        <th scope="row">{{ $tarefa->id }}</th>
-                                        <td>{{ $tarefa->tarefa }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($tarefa->data_limite_conclusao)) }}</td>
-                                        <td>
-                                            <a href="{{ route('tarefa.edit', $tarefa->id) }}">Editar</a>
-                                        </td>
-                                        <td>
-                                            <form id="form_{{ $tarefa->id }}" action="{{ route('tarefa.destroy', ['tarefa' => $tarefa->id]) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#" onclick="document.getElementById('form_{{ $tarefa->id }}').submit()">Excluir</a>
-                                            </form>
-                                        </td>
-                                    </tr>                                    
-                                @endforeach                              
-                            </tbody>
-                          </table>
+                                <th scope="col">Data limite conclusão</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-                          <nav>
-                            <ul class="pagination">
-                              <li class="page-item"><a class="page-link" href="{{ $tarefas->previousPageUrl() }}">Voltar</a></li>
-                                
-                                @for ($i = 1; $i <= $tarefas->lastPage(); $i++)
-                                    <li class="page-item {{ $tarefas->currentPage() == $i ? 'active' : '' }} ">
-                                        <a class="page-link" href="{{ $tarefas->url($i) }}">{{ $i }}</a>
-                                    </li>                                    
-                                @endfor                              
+                        <tbody>
+                            @foreach($tarefas as $key => $t)
+                                <tr>
+                                    <th scope="row">{{ $t['id'] }}</th>
+                                    <td>{{ $t['tarefa'] }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($t['data_limite_conclusao'])) }}</td>
+                                    <td><a href="{{ route('tarefa.edit', $t['id']) }}">Editar</a></td>
+                                    <td>
+                                        <form id="form_{{$t['id']}}" method="post" action="{{ route('tarefa.destroy', ['tarefa' => $t['id']]) }}">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                        <a href="#" onclick="document.getElementById('form_{{$t['id']}}').submit()">Excluir</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-                              <li class="page-item"><a class="page-link" href="{{ $tarefas->nextPageUrl() }}">Avançar</a></li>
-                            </ul>
-                          </nav>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="{{ $tarefas->previousPageUrl() }}">Voltar</a></li>
 
-                    </div>
+                            @for($i = 1; $i <= $tarefas->lastPage(); $i++)
+                                <li class="page-item {{ $tarefas->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $tarefas->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                            
+                            <li class="page-item"><a class="page-link" href="{{ $tarefas->nextPageUrl() }}">Avançar</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
