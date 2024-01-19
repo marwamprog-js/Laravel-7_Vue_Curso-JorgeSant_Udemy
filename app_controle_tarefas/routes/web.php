@@ -29,10 +29,11 @@ Route::get('mensagem-teste', function () {
 
 Auth::routes(['verify' => true]);
 
-//#### Rotas protegidas
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home')
-    ->middleware('verified');
+//#### Rotas protegidas ##########################
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+//     ->name('home')
+//     ->middleware('verified');
 
 Route::resource('/tarefa', 'App\Http\Controllers\TarefaController')
     ->middleware('verified');
