@@ -14,7 +14,8 @@
                             <a href="{{route('tarefa.create')}}" class="float-right ml-2">Novo</a>
                             <a href="{{route('tarefa.exportacao', ['extensao' => 'xlsx'])}}" class="float-right ml-2">XLSX</a>
                             <a href="{{route('tarefa.exportacao', ['extensao' => 'csv'])}}" class="float-right ml-2">CSV</a>
-                            <a href="{{route('tarefa.exportacao', ['extensao' => 'pdf'])}}" class="float-right">PDF</a>
+                            <a href="{{route('tarefa.exportacao', ['extensao' => 'pdf'])}}" class="float-right ml-2">PDF</a>
+                            <a href="{{route('tarefa.exportar')}}" class="float-right">DOM_PDF</a>
                         </div>
                     </div>
                     
